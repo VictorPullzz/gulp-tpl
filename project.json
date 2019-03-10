@@ -1,0 +1,17 @@
+{
+    "info": {
+        "name": "Любимые фильмы",
+        "slug": "Favorite_films",
+        "description": "My test project for testing how work gulp",
+        "keywords": "Myproject, project, gulp"
+    },
+    "creator": {
+        "name": "Razdorov V.N.",
+        "email": "GORPONFFFFFF@yandex.ru"
+    },
+    "pages": {
+        "home": "Домашняя страница",
+        "profile": "Личный кабинет",
+        "login": "Вход"
+    }
+}

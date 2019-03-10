@@ -1,0 +1,32 @@
+doctype html
+html(lang="ru")
+	head
+		meta(charset="UTF-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+		title Верстка проекта #{params.project.info.name}
+		link(href="index.css", rel="stylesheet")
+		link(href="https://fonts.googleapis.com/css?family=Play&amp;subset=cyrillic,cyrillic-ext,greek,latin-ext,vietnamese", rel="stylesheet")
+	body
+		main(class="main")
+			header(class="header")
+				div(class="header-project")
+					div(class="header-project-info") 
+						span(class="header-project-name") #{params.project.info.name}
+						span(class="header-project-desc") #{params.project.info.description}
+					div(class="header-project-creator") 
+						div(class="header-project-creator-name") creator: 
+							span #{params.project.creator.name}
+						div(class="header-project-creator-email") email: 
+							span #{params.project.creator.email}
+			page(class="page")
+				h1(class="page-title") Pages
+				
+				div(class="page-list")
+					if params.project.pages
+						- var i = 0
+						- each page, code in params.project.pages
+							- i++;
+							a(href="pages/#{code}.html", class="page-item") 
+								div #{i}
+								span #{page}
