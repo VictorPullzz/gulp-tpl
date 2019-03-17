@@ -3,6 +3,9 @@
 // gulp
 const gulp = require('gulp');
 
+// params (path...)
+const params ={};
+
 // plugins
 const plugins = {
     'fs': require("fs"),
@@ -21,26 +24,44 @@ const plugins = {
     'ttf2woff': require("gulp-ttf2woff"),
     'requireDir': require('require-dir'),
     'browserSync': require('browser-sync').create(),
-    'autoprefixer': require('gulp-autoprefixer')
+    'autoprefixer': require('gulp-autoprefixer'),
+    // 'interactive': require('gulp-interactive'),
+    'inquirer': require('inquirer'),
+    'jsonfile': require('jsonfile'),
+    'babel': require('gulp-babel'),
 }
 
 // path for gulp work
-var params = {
-        'path': require('./gulp/path.json'),
-        'project': require('./project.json')
-    };
+params.path = require('./gulp/path.json');
+
+try {
+    params.project = require('./project.json');
+}
+catch(e){}
+
+// file where store question about new project
+var question = require('./gulp/question.json');
 
 // join tasks
 var tasks = plugins.requireDir(params.path.gulp.tasks);
 
-// create start structure
-gulp.task('project', function(done) {
-	done(tasks.project(gulp, params, plugins));
-});
+// create file about project
+gulp.task('project:information', gulp.series(function(done) {
+    plugins.inquirer.prompt(question.qustions).then(function(answers) {
+        params.answers = answers;
+        tasks.project(gulp, params, plugins, ['createInfoAboutProject']);
+        done()
+    });
+}));
 
 // create index page
 gulp.task('project:index', function(done) {
 	done(tasks.project(gulp, params, plugins, ['createIndexPage']));
+});
+
+// create start structure
+gulp.task('project', function(done) {
+	done(tasks.project(gulp, params, plugins));
 });
 
 // assets ex: fonts, img ...

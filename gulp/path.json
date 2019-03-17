@@ -1,5 +1,6 @@
 {
     "gulp": {
+        "project_info": "./project.json",
         "tasks": "./gulp/tasks/",
         "styles": "./gulp/settings/styles/",
         "index": "./gulp/settings/index/",
@@ -15,6 +16,7 @@
         "styles_components": "./dist/css/components/",
         "js": "./dist/js/",
         "js_addons": "./dist/js/addons/",
+        "js_components": "./dist/js/components/",
         "pages": "./dist/pages/",
         "pages_layouts": "./dist/pages/layouts/",
         "img": "./dist/assets/img/",

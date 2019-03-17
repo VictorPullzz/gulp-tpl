@@ -1,17 +1,26 @@
 {
     "info": {
-        "name": "Любимые фильмы",
-        "slug": "Favorite_films",
-        "description": "My test project for testing how work gulp",
-        "keywords": "Myproject, project, gulp"
+        "name": "Favorite Films",
+        "desc": "This service for choose like films",
+        "slug": "favorite_films",
+        "keywords": "films, favorite films, ratings films"
     },
     "creator": {
-        "name": "Razdorov V.N.",
+        "name": "V. Razdorov",
         "email": "GORPONFFFFFF@yandex.ru"
     },
-    "pages": {
-        "home": "Домашняя страница",
-        "profile": "Личный кабинет",
-        "login": "Вход"
-    }
+    "pages": [
+        {
+            "name": "Home",
+            "code": "home"
+        },
+        {
+            "name": "Login",
+            "code": "login"
+        },
+        {
+            "name": "Films",
+            "code": "films"
+        }
+    ]
 }

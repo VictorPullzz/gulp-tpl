@@ -14,6 +14,8 @@ module.exports = function (gulp, params, plugins, methods) {
                 this.assetsFonts();
                 this.assetsImg();
                 this.assetsSvg();
+                this.assetsIcons();
+                this.assetsMedia();
             }
         },
 
@@ -29,6 +31,22 @@ module.exports = function (gulp, params, plugins, methods) {
                         params.path.dist.img + "**"
                     ])
                     .pipe(gulp.dest(params.path.src.img));
+        },
+
+        assetsIcons: function() {
+            return  gulp.src([
+                        params.path.dist.icon + "*",
+                        params.path.dist.icon + "**"
+                    ])
+                    .pipe(gulp.dest(params.path.src.icon));
+        },
+
+        assetsMedia: function() {
+            return  gulp.src([
+                        params.path.dist.media + "*",
+                        params.path.dist.media + "**"
+                    ])
+                    .pipe(gulp.dest(params.path.src.media));
         },
 
         assetsSvg: function() {

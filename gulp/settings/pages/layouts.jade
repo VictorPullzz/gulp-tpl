@@ -6,7 +6,42 @@ doctype html
 <!--[if !IE]><!-->
 html(lang="ru", class="no-js", prefix="og:http://ogp.me/ns#")
 	<!--<![endif]-->
-	head()
+	head
+		+headOption({
+			charset: "utf-8",
+			title: params.project.info.name,
+			keywords: params.project.info.keywords,
+			description: params.project.info.desc,
+			robots: "index, follow",
+			viewport: "width=device-width, initial-scale=1.0"
+		})
+		+headFavicon({
+			favicon: {
+				src: "/assets/icon/favicon.ico"
+			},
+			appleTouchIcon: [
+				{
+					src: "/assets/icon/apple-touch-icon.jpg",
+					size: "76x76"
+				}, {
+					src: "/assets/icon/apple-touch-icon-76.jpg",
+					size: "76x76"
+				}, {
+					src: "/assets/icon/apple-touch-icon-140.jpg",	
+					size: "140x140"
+				}, {
+					src: "/assets/icon/apple-touch-icon-152.jpg",
+					size: "152x152"
+				}
+			]
+		})
+		+css([
+			{
+				media: "screen",
+				href: "../css/" + params.project.info.slug + ".css",
+				noCache: true
+			}
+		])
 		
 	body(itemscope, itemtype="http://schema.org/WebPage")
 
@@ -17,3 +52,10 @@ html(lang="ru", class="no-js", prefix="og:http://ogp.me/ns#")
 				block content
 			
 			footer(class="page-footer", itemscope, itemtype="http://schema.org/WPFooter")
+	
+		+js([
+			{
+				src: "../js/" + params.project.info.slug + ".js"
+			}
+		])
+			

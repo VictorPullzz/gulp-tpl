@@ -1,0 +1,40 @@
+{
+    "qustions": [
+        {
+            "type": "input",
+            "name": "info_name",
+            "message": "Name project",
+            "default": "My first project"
+        },
+        {
+            "type": "input",
+            "name": "info_desc",
+            "message": "Description project",
+            "default": "-"
+        },
+        {
+            "type": "input",
+            "name": "info_keywords",
+            "message": "Keywords project (for SEO)",
+            "default": "project, gulp"
+        },
+        {
+            "type": "input",
+            "name": "creator_name",
+            "message": "Creator project",
+            "default": "-"
+        },
+        {
+            "type": "input",
+            "name": "creator_email",
+            "message": "E-mail creator",
+            "default": "-"
+        },
+        {
+            "type": "input",
+            "name": "pages_list",
+            "message": "List Pages (home, account, login...)",
+            "default": "home"
+        }
+    ]
+}

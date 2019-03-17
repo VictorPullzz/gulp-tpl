@@ -13,13 +13,52 @@ module.exports = function (gulp, params, plugins, methods) {
             if (!methods) {
                 this.createDevelopStructure();
                 this.createDevelopStyle();
+                this.createDevelopScript();
                 this.createIndexPage();
                 this.createLayoutsPage();
+                this.createStartPage();
             }
         },
 
+        // create information about project
+        createInfoAboutProject() {
+            let json = {};
+
+            for (var key in params.answers) {
+                let parse = key.split('_');
+
+                if (! json.hasOwnProperty(parse[0])) {
+                    json[parse[0]] = {}
+                }
+
+                if (parse[0] !== 'pages') {
+                    json[parse[0]][parse[1]] = params.answers[key];
+
+                    if (parse[0] == 'info' && parse[1] == 'name') {
+                        json[parse[0]]['slug'] = params.answers[key].toLowerCase()
+                            .replace(/ /g,'_')
+                            .replace(/[^\w-]+/g,'');
+                    }
+                } else {
+                    var pages = [],
+                        arPages = params.answers[key].replace(/[ ,]+/, ',').split(',');
+
+                    for (var page = 0; page < arPages.length; page++) {
+                        pages.push({
+                            "name": arPages[page].replace(/[ ,]+/, '').replace(/^\w/, c => c.toUpperCase()),
+                            "code": arPages[page].replace(/[ ,]+/, '').toLowerCase()
+                        })
+                    } ;
+
+                    json[parse[0]] = pages;
+                }
+            }
+
+            return plugins.jsonfile.writeFileSync(params.path.gulp.project_info, json, { spaces: 4 });
+        },
+
         // create structure project
-        createDevelopStructure: function() {
+        createDevelopStructure() {
             for (let keyDist in params.path.dist) {
                 if(!plugins.fs.existsSync(params.path.dist[keyDist])) {
                     plugins.fs.mkdirSync(params.path.dist[keyDist]);
@@ -28,7 +67,7 @@ module.exports = function (gulp, params, plugins, methods) {
         },
 
         // create starting styles files
-        createDevelopStyle: function() {
+        createDevelopStyle() {
         	var settingsCss = params.path.gulp.styles + 'setting.styl',
                 templateCss = params.path.gulp.styles + 'template.styl',
                 templateCssResponsive = params.path.gulp.styles + 'template.responsive.styl',
@@ -50,8 +89,19 @@ module.exports = function (gulp, params, plugins, methods) {
             }
         },
 
+        // create starting styles files
+        createDevelopScript() {
+        	var fileJs = params.path.dist.js + params.project.info.slug + '.js';
+
+            if(!plugins.fs.existsSync(fileJs)) {
+        		plugins.fs.writeFile(fileJs, '`Your project: ' + params.project.name + '`', (err) => {
+                    if (err) throw err;
+                });
+            }
+        },
+
         // create index page
-        createIndexPage: function() {
+        createIndexPage() {
             gulp.src(params.path.gulp.index + "index.jade")
         		.pipe(plugins.jade({
         			locals: {
@@ -68,11 +118,28 @@ module.exports = function (gulp, params, plugins, methods) {
         		.pipe(gulp.dest(params.path.src.base));
         },
 
-        // create index page
-        createLayoutsPage: function() {
+        // create holder page
+        createLayoutsPage() {
             gulp.src(params.path.gulp.pages + "layouts.jade")
          		.pipe(plugins.rename('template.jade'))
         		.pipe(gulp.dest(params.path.dist.pages_layouts));
+        },
+
+        // create starting page
+        createStartPage() {
+            plugins.jsonfile.readFile(params.path.gulp.project_info, function (err, data) {
+                if (err) console.error(err)
+
+                data.pages.forEach((page) => {
+                    var p = params.path.dist.pages + page.code + '.jade';
+                    if(!plugins.fs.existsSync(p)) {
+                		plugins.fs.writeFile(p, 'extends ./layouts/template \n\nblock content', (err) => {
+                            if (err) throw err;
+                        });
+                    }
+                });
+
+            });
         }
     }
 

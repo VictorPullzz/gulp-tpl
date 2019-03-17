@@ -17,6 +17,9 @@ module.exports = function (gulp, params, plugins, methods) {
 
         scriptsJs: function() {
             gulp.src(params.path.dist.js + "**/*.js")
+                .pipe(plugins.babel({
+                    presets: ['@babel/env']
+                }))
                 .pipe(plugins.newer({
                     dest: params.path.dist.js,
                     ext: "/**/*.js"

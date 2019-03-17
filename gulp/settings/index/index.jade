@@ -13,7 +13,7 @@ html(lang="ru")
 				div(class="header-project")
 					div(class="header-project-info") 
 						span(class="header-project-name") #{params.project.info.name}
-						span(class="header-project-desc") #{params.project.info.description}
+						span(class="header-project-desc") #{params.project.info.desc}
 					div(class="header-project-creator") 
 						div(class="header-project-creator-name") creator: 
 							span #{params.project.creator.name}
@@ -27,6 +27,6 @@ html(lang="ru")
 						- var i = 0
 						- each page, code in params.project.pages
 							- i++;
-							a(href="pages/#{code}.html", class="page-item") 
+							a(href="pages/#{page.code}.html", class="page-item") 
 								div #{i}
-								span #{page}
+								span #{page.name}
