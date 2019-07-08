@@ -21,8 +21,8 @@ module.exports = function (gulp, params, plugins, methods) {
                 server: {
                     baseDir: [
                         params.path.gulp.index,
-                        params.path.src.pages,
-                        params.path.src.base
+                        params.path.dist.pages,
+                        params.path.dist.base
                     ],
                 },
                 port: 3030,

@@ -99,15 +99,15 @@ gulp.task("default",  gulp.series('run', 'server', function() {
     plugins.watch(params.path.gulp.index + '**', gulp.series('project:index')).on('change', plugins.browserSync.reload);
 
     // watch assets
-    plugins.watch(params.path.dist.assets + '**', gulp.series('assets')).on('change', plugins.browserSync.reload);
+    plugins.watch(params.path.src.assets + '**', gulp.series('assets')).on('change', plugins.browserSync.reload);
 
     // watch styles
-    plugins.watch(params.path.dist.styles + '**', gulp.series('styles')).on('change', plugins.browserSync.reload);
+    plugins.watch(params.path.src.styles + '**', gulp.series('styles')).on('change', plugins.browserSync.reload);
 
     // watch scripts
-    plugins.watch(params.path.dist.js + '**', gulp.series('scripts')).on('change', plugins.browserSync.reload);
+    plugins.watch(params.path.src.js + '**', gulp.series('scripts')).on('change', plugins.browserSync.reload);
 
     // watch pages
-    plugins.watch(params.path.dist.pages + '**', gulp.series('pages')).on('change', plugins.browserSync.reload);
+    plugins.watch(params.path.src.pages + '**', gulp.series('pages')).on('change', plugins.browserSync.reload);
 
 }));

@@ -16,15 +16,15 @@ module.exports = function (gulp, params, plugins, methods) {
         },
 
         scriptsJs: function() {
-            gulp.src(params.path.dist.js + "**/*.js")
+            gulp.src(params.path.src.js + "**/*.js")
                 .pipe(plugins.babel({
                     presets: ['@babel/env']
                 }))
                 .pipe(plugins.newer({
-                    dest: params.path.dist.js,
+                    dest: params.path.src.js,
                     ext: "/**/*.js"
                 }))
-                .pipe(gulp.dest(params.path.src.js))
+                .pipe(gulp.dest(params.path.dist.js))
                 .pipe(plugins.browserSync.stream());
         }
 

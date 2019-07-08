@@ -20,39 +20,39 @@ module.exports = function (gulp, params, plugins, methods) {
         },
 
         assetsFonts: function() {
-            return  gulp.src(params.path.dist.fonts + "*.ttf")
+            return  gulp.src(params.path.src.fonts + "*.ttf")
                         .pipe(plugins.ttf2woff())
-                        .pipe(gulp.dest(params.path.src.fonts));
+                        .pipe(gulp.dest(params.path.dist.fonts));
         },
 
         assetsImg: function() {
             return  gulp.src([
-                        params.path.dist.img + "*",
-                        params.path.dist.img + "**"
+                        params.path.src.img + "*",
+                        params.path.src.img + "**"
                     ])
-                    .pipe(gulp.dest(params.path.src.img));
+                    .pipe(gulp.dest(params.path.dist.img));
         },
 
         assetsIcons: function() {
             return  gulp.src([
-                        params.path.dist.icon + "*",
-                        params.path.dist.icon + "**"
+                        params.path.src.icon + "*",
+                        params.path.src.icon + "**"
                     ])
-                    .pipe(gulp.dest(params.path.src.icon));
+                    .pipe(gulp.dest(params.path.dist.icon));
         },
 
         assetsMedia: function() {
             return  gulp.src([
-                        params.path.dist.media + "*",
-                        params.path.dist.media + "**"
+                        params.path.src.media + "*",
+                        params.path.src.media + "**"
                     ])
-                    .pipe(gulp.dest(params.path.src.media));
+                    .pipe(gulp.dest(params.path.dist.media));
         },
 
         assetsSvg: function() {
-            return  gulp.src([params.path.dist.svg + "*.svg", params.path.dist.svg + "**/*.svg"])
+            return  gulp.src([params.path.src.svg + "*.svg", params.path.src.svg + "**/*.svg"])
                     .pipe(plugins.newer({
-                        dest: params.path.dist.svg,
+                        dest: params.path.src.svg,
                         ext: "/**/*.svg"
                     }))
                     .pipe(plugins.svgmin({
@@ -74,17 +74,13 @@ module.exports = function (gulp, params, plugins, methods) {
             				}, {
             					removeMetadata: true
             				}, {
-            					removeAttrs: {
-            						attrs: ["id", "class"]
-            					}
-            				}, {
             					removeStyleElement: true
             				}, {
             					removeViewBox: true
             				}
             			]
                     }))
-                    .pipe(gulp.dest(params.path.src.svg));
+                    .pipe(gulp.dest(params.path.dist.svg));
         }
 
     }

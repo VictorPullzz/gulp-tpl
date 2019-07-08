@@ -59,9 +59,9 @@ module.exports = function (gulp, params, plugins, methods) {
 
         // create structure project
         createDevelopStructure() {
-            for (let keyDist in params.path.dist) {
-                if(!plugins.fs.existsSync(params.path.dist[keyDist])) {
-                    plugins.fs.mkdirSync(params.path.dist[keyDist]);
+            for (let key in params.path.src) {
+                if(!plugins.fs.existsSync(params.path.src[key])) {
+                    plugins.fs.mkdirSync(params.path.src[key]);
                 }
             }
         },
@@ -71,11 +71,11 @@ module.exports = function (gulp, params, plugins, methods) {
         	var settingsCss = params.path.gulp.styles + 'setting.styl',
                 templateCss = params.path.gulp.styles + 'template.styl',
                 templateCssResponsive = params.path.gulp.styles + 'template.responsive.styl',
-                fileCss = params.path.dist.styles + params.project.info.slug + '.styl',
-                fileCssResponsive = params.path.dist.styles + params.project.info.slug + '.responsive.styl';
+                fileCss = params.path.src.styles + params.project.info.slug + '.styl',
+                fileCssResponsive = params.path.src.styles + params.project.info.slug + '.responsive.styl';
 
             gulp.src(settingsCss)
-                .pipe(gulp.dest(params.path.dist.styles_settings));
+                .pipe(gulp.dest(params.path.src.styles_settings));
 
         	if(!plugins.fs.existsSync(fileCss)) {
         		plugins.fs.writeFile(fileCss, plugins.fs.readFileSync(templateCss, "utf8"), (err) => {
@@ -91,7 +91,7 @@ module.exports = function (gulp, params, plugins, methods) {
 
         // create starting styles files
         createDevelopScript() {
-        	var fileJs = params.path.dist.js + params.project.info.slug + '.js';
+        	var fileJs = params.path.src.js + params.project.info.slug + '.js';
 
             if(!plugins.fs.existsSync(fileJs)) {
         		plugins.fs.writeFile(fileJs, '`Your project: ' + params.project.name + '`', (err) => {
@@ -115,14 +115,14 @@ module.exports = function (gulp, params, plugins, methods) {
         			minifyJS: true,
         			minifyCSS: true
         		}))
-        		.pipe(gulp.dest(params.path.src.base));
+        		.pipe(gulp.dest(params.path.dist.base));
         },
 
         // create holder page
         createLayoutsPage() {
             gulp.src(params.path.gulp.pages + "layouts.jade")
          		.pipe(plugins.rename('template.jade'))
-        		.pipe(gulp.dest(params.path.dist.pages_layouts));
+        		.pipe(gulp.dest(params.path.src.pages_layouts));
         },
 
         // create starting page
@@ -131,7 +131,7 @@ module.exports = function (gulp, params, plugins, methods) {
                 if (err) console.error(err)
 
                 data.pages.forEach((page) => {
-                    var p = params.path.dist.pages + page.code + '.jade';
+                    var p = params.path.src.pages + page.code + '.jade';
                     if(!plugins.fs.existsSync(p)) {
                 		plugins.fs.writeFile(p, 'extends ./layouts/template \n\nblock content', (err) => {
                             if (err) throw err;
