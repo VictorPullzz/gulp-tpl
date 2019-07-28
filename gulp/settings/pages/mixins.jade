@@ -46,16 +46,16 @@ mixin js(params)
 			script(type="text/javascript", src="#{file.src}")
 
 mixin menu(params)
-	if params.rootClass && params.items
-		- var innerCLass = params.rootClass + "-inner " + (params.ulClass ? params.ulClass : '')
-		- var holderClass = params.rootClass + "-item-holder " + (params.holderClass ? params.holderClass : '')
+	if params.mainClass && params.items
+		- var innerCLass = params.mainClass + "-inner" + (params.ulClass ? params.ulClass : '')
+		- var holderClass = params.mainClass + "-item-holder" + (params.holderClass ? params.holderClass : '')
 		- var holderSubClass = holderClass + "--has-submenu"
-		- var itemClass = params.rootClass + "-item"
+		- var itemClass = params.mainClass + "-item"
 		- var itemCurrentClass = itemClass + " " + itemClass + "--current"
-		- var itemTextClass = params.rootClass + "-item-name"
-		- var itemAddClass = params.rootClass + "-item-add"
+		- var itemTextClass = params.mainClass + "-item-name"
+		- var itemAddClass = params.mainClass + "-item-add"
 		
-		nav(itemscope, itemtype="http://schema.org/SiteNavigationElement", class="#{params.rootClass} #{params.addClass ? params.addClass : ''}")
+		nav(itemscope, itemtype="http://schema.org/SiteNavigationElement", class="#{params.mainClass} #{params.addClass ? params.addClass : ''}")
 			ul(class="#{innerCLass}")
 				each item in params.items
 					- var customItemClass = (item.linkClass ? itemClass + " " + item.linkClass : itemClass)
@@ -68,17 +68,17 @@ mixin menu(params)
 									span(class="#{itemAddClass}") #{item.addHTML}
 							if item.items
 								+menu({
-									"rootClass": params.rootClass + "-level1",
+									"mainClass": params.mainClass + "-inside",
 									"items": item.items
 								})
 						else if item.href
-							a(href="#{item.href}", title="#{item.title}", itemprop="url", class="#{customItemClass} #{item.class ? item.class : ''}")
+							a(href="#{item.href}", title="#{item.title}", itemprop="url", class="#{customItemClass}#{item.class ? item.class : ''} #{item.activeClass}")
 								span(itemprop="name", class="#{customItemTextClass} #{item.textCLass ? item.textCLass : ''}") #{item.name}
 								if item.addHTML
 									span(class="#{itemAddClass}") #{item.addHTML}
 							if item.items
 								+menu({
-									"rootClass": params.rootClass + "-level1",
+									"mainClass": params.mainClass + "-inside",
 									"items": item.items
 								})
 

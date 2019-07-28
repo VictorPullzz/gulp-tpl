@@ -26,12 +26,6 @@ main {
     margin: 0 auto;
     height: 100%;
     min-height: 100vh;
-    border-width: 10px;
-    border-style: solid;
-    border-image: linear-gradient(to bottom, rgb(41, 74, 68), rgb(41, 74, 68)) 1 100%;
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
 }
 .header {
     position: relative;
@@ -40,9 +34,11 @@ main {
     display: flex;
     -ms-align-items: stretch;
     align-items: stretch;
-    background: #106363;
+    margin-bottom: 5px;
+    background: #f1f1f1;
     overflow: hidden;
-    color: #fff;
+    color: #636363;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.22);
 }
 .header:after {
     content: url(project.svg);
@@ -74,7 +70,7 @@ main {
     display: block;
     font-size: 60px;
     margin-top: 50px;
-    text-shadow: 4px 1px 1px #0000007a;
+    color: #423413;
 }
 .header-project .header-project-name:before {
     content: "";
@@ -82,9 +78,9 @@ main {
     bottom: -10px;
     left: -20px;
     display: block;
-    width: 100px;
+    width: 600px;
     height: 2px;
-    background: #449fa9;
+    background: #423413;
 }
 .header-project .header-project-desc {
     display: block;
@@ -105,7 +101,7 @@ main {
 .header-project .header-project-creator .header-project-creator-name span,
 .header-project .header-project-creator .header-project-creator-email span {
     padding-left: 5px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: 1px;
 }
@@ -113,9 +109,10 @@ main {
     position: relative;
     display: block;
     min-height: 80vh;
-    background: #0e9696;
+    background: #e6faff;
     padding-left: 60px;
     overflow: hidden;
+    box-shadow: inset 0 0 265px 110px rgba(0, 0, 0, 0.2);
 }
 .page:after {
     content: url(page.svg);
@@ -132,7 +129,7 @@ main {
     padding: 20px 0 40px 0;
     font-size: 36px;
     font-weight: 600;
-    color: #fff;
+    color: #423413;
 }
 .page-list {
     position: relative;
@@ -148,7 +145,7 @@ main {
     height: 40px;
     border-radius: 15px 0px 0px 15px;
     background: #fff;
-    color: #449fa9;
+    color: #000;
     text-decoration: none;
     font-size: 18px;
 }
@@ -160,7 +157,9 @@ main {
     align-items: center;
     padding: 0 20px;
     border-radius: 15px 0px 0px 15px;
-    background: #106363;
+    background: #fff;
+    border-right: 4px solid #f0f0f0;
+    font-weight: 600;
 }
 .page-list .page-item span {
     position: relative;
@@ -185,6 +184,6 @@ main {
     transform: translateY(-50%);
 }
 .page-list .page-item span:hover {
-    color: #fff;
-    background: #106363;
+    color: #423413;
+    background: #ccd0d0;
 }

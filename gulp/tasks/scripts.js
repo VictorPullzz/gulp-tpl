@@ -16,7 +16,7 @@ module.exports = function (gulp, params, plugins, methods) {
         },
 
         scriptsJs: function() {
-            gulp.src(params.path.src.js + "**/*.js")
+            gulp.src(params.path.src.js + "/" + params.project.info.slug + ".js")
                 .pipe(plugins.babel({
                     presets: ['@babel/env']
                 }))
@@ -25,6 +25,10 @@ module.exports = function (gulp, params, plugins, methods) {
                     ext: "/**/*.js"
                 }))
                 .pipe(gulp.dest(params.path.dist.js))
+                .pipe(plugins.browserSync.stream());
+
+            gulp.src(params.path.src.js + "/plugins/*.js")
+                .pipe(gulp.dest(params.path.dist.js_plugins))
                 .pipe(plugins.browserSync.stream());
         }
 

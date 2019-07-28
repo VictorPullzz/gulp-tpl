@@ -20,7 +20,10 @@ module.exports = function (gulp, params, plugins, methods) {
         },
 
         assetsFonts: function() {
-            return  gulp.src(params.path.src.fonts + "*.ttf")
+            return  gulp.src([
+                            params.path.src.fonts + "*.ttf",
+                            params.path.src.fonts + "*.woff"
+                        ])
                         .pipe(plugins.ttf2woff())
                         .pipe(gulp.dest(params.path.dist.fonts));
         },

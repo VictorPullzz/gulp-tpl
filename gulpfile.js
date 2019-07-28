@@ -29,6 +29,8 @@ const plugins = {
     'inquirer': require('inquirer'),
     'jsonfile': require('jsonfile'),
     'babel': require('gulp-babel'),
+    'path': require("path"),
+    'data': require('gulp-data')
 }
 
 // path for gulp work

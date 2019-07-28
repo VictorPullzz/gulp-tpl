@@ -26,7 +26,9 @@ module.exports = function (gulp, params, plugins, methods) {
                     ],
                 },
                 port: 3030,
-                open: true,
+                open: false,
+                // online: true,
+                tunnel: true,
                 browser: params.path.gulp.browser,
             });
         }

@@ -20,10 +20,13 @@ module.exports = function (gulp, params, plugins, methods) {
                     params.path.src.pages + '**/*.jade',
                     '!' + params.path.src.pages_layouts + '**'
                 ])
+                .pipe(plugins.data(function(file) {
+        			return {
+        				pageName: plugins.path.basename(file.path).replace(".jade", ""),
+                        params: params
+        			};
+        		}))
         		.pipe(plugins.jade({
-        			locals: {
-        				params: params,
-        			},
         			pretty: '\t'
         		}))
         		.pipe(gulp.dest(params.path.dist.pages))
